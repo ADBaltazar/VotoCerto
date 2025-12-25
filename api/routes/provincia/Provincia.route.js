@@ -1,12 +1,33 @@
-import {ControllerProvincia} from "../../models/provincia/Provincia.controller.js";
+import { RepositoryProvincia } from '../../models/provincia/Provincia.repository.js'
+import { ServiceProvincia } from '../../models/provincia/Provincia.service.js'
+import { ControllerProvincia } from '../../models/provincia/Provincia.controller.js'
+
 import express from 'express'
-const RouteProvincia = express.Router()
+const Route= express.Router()
 
-const Controller = new ControllerProvincia()
+const Repository = new RepositoryProvincia()
+const Service = new ServiceProvincia(Repository)
+const Controller = new ControllerProvincia(Service)
 
-RouteProvincia.post('/provincia/nova',Controller.nova)
-RouteProvincia.get('/provincia/lista',Controller.ListarProvincias)
-RouteProvincia.put('/provincia/actualizar',Controller.ActualizarProvincia)
+//router.post('/tasks', controller.create.bind(controller))
+Route.post(
+    '/provincia/nova',
+    Controller.CreateProvincia.bind(Controller)
+)
+
+Route.get(
+    '/provincias',
+    Controller.Listarprovincias.bind(Controller)
+)
+
+Route.delete(
+    '/provincia/:id',
+    Controller.ElimiarProvincia.bind(Controller)
+)
+/*
+RouteProvincia.post('/provincia/nova',Controller.nova.bind(Controller))
+RouteProvincia.get('/provincia/lista',Controller.ListarProvincias.bind(Controller))
+RouteProvincia.put('/provincia/actualizar',Controller.ActualizarProvincia.bind(Controller))
 RouteProvincia.delete('/provincia/eliminar/:id',Controller.ElimarProvincia)
-
-export{RouteProvincia}
+*/
+export{Route}

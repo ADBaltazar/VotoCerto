@@ -1,43 +1,35 @@
 import { ProvinciaModel } from "./Provincia.model.js"
+import { BaseRepository } from "../../shared/BaseRepository.js"
 
-export class RepositoryProvincia{
+export class RepositoryProvincia extends BaseRepository{
 
-    /**
-     * 
-     * Esta camada será a resonsavel por conversar com o banco de dados
-     * por meio de consultas - CRUD
-     * 
-     */
+     constructor(){
+          super(ProvinciaModel)
+     }
 
-    //criar nova provincia
-   async create(data){
-        return await ProvinciaModel.create(data)
-   }
+     //create
+     create(data){
+          return this.model.create(data)
+     }
+     
+     //LSITAR TODAS AS PROVINCIAS
+     findAll(){
+          return this.model.findAll()
+     }
 
-   //LSITAR TODAS AS PROVINCIAS
-   async findAll(){
-        return await ProvinciaModel.findAll({raw:true})
-   }
+     //
+     findById(id){
+          return this.model.findByPk(id)
+     }
 
-   //buscar provincia pelo nome
-   async findByName(nome){
-        return await ProvinciaModel.findOne({where:{nome:nome}})
-   }
+     //
+     update(data){
+          return this.model.update(data)
+     }
 
-   //buscar provincia pelo seu Id
-   async findByPk(id){
-        return await ProvinciaModel.findByPk(id)
-   }
-
-   //Eliminar provincia pelo seu ID
-   async destroyByPk(id){
-        return await ProvinciaModel.destroy({where:{id_provincia:id}})
-   }
-
-   //actualizar o nome de uma provincia
-   async update(data){
-        return await ProvinciaModel.update(data,{where:{id_provincia:data.id_provincia}})
-   }
-
+     //elimiar uma provincia
+     deleteById(id){
+          return this.model.destroy({where:{id_provincia:id}})
+     }
 
 }

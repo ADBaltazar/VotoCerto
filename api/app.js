@@ -1,7 +1,7 @@
 import express from 'express'
 const app = express()
 
-import { RouteProvincia } from './routes/provincia/Provincia.route.js'
+import { Route } from './routes/provincia/Provincia.route.js'
 import { AppError } from './Error/app.Error.js'
 
 //configurando leitura de ficheiro JSON
@@ -9,7 +9,7 @@ app.use(express.json())
 app.get('/',(req,res)=>{
     res.json('bem vindo a pagina do eleito Angola')
 })
-app.use(RouteProvincia)
+app.use(Route)
 
 
 //tratamento de Erro

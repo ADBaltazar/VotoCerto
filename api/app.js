@@ -1,14 +1,23 @@
 import express from 'express'
+
 const app = express()
 
 import { Route } from './routes/provincia/Provincia.route.js'
-import { AppError } from './Error/app.Error.js'
+import { AppError } from './Error/app.Error.js' 
+
+import swagger from 'swagger-ui-express'
+import swaggerDocumentation from './swagger.json' with {type:'json'}
 
 //configurando leitura de ficheiro JSON
 app.use(express.json())
-app.get('/',(req,res)=>{
-    res.json('bem vindo a pagina do eleito Angola')
-})
+
+app.use(
+  '/',
+  swagger.serve,
+  swagger.setup(swaggerDocumentation)
+)
+
+
 app.use(Route)
 
 

@@ -20,6 +20,16 @@ export default {
         allowNull:false,
         unique:true
       },
+      id_municipio:{
+        type:Sequelize.INTEGER,
+        allowNull:false,
+        references:{
+          model:"municipio",
+          key:"id_municipio",
+          onUpdate: 'CASCADE',
+          onDelete: 'RESTRICT'
+        }
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

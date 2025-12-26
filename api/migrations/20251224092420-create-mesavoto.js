@@ -20,6 +20,16 @@ export default {
           allowNull:false,
           unique:true
         },
+        id_assembleia:{
+          type:Sequelize.INTEGER,
+          allowNull:false,
+          references:{
+            model:"assembleia",
+            key:"id_assembleia",
+            onUpdate: 'CASCADE',
+            onDelete: 'RESTRICT'
+          }
+        },
         status: Sequelize.ENUM('ABERTA','ENCERRADA'),
         created_at: {
           type: Sequelize.DATE,

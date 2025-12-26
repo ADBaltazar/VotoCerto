@@ -9,7 +9,7 @@ export default {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-      await queryInterface.createTable('municipio',{
+      await queryInterface.createTable('assembleia',{
         id_assembleia:{
           type: Sequelize.INTEGER,
           autoIncrement:true,
@@ -19,6 +19,16 @@ export default {
           type: Sequelize.STRING,
           allowNull:false,
           unique:true
+        },
+        id_comuna:{
+          type:Sequelize.INTEGER,
+          allowNull:false,
+          references:{
+            model:"comuna",
+            key:"id_comuna",
+            onUpdate: 'CASCADE',
+            onDelete: 'RESTRICT'
+          }
         },
         created_at: {
           type: Sequelize.DATE,
@@ -40,6 +50,6 @@ export default {
      * Example:
      * await queryInterface.dropTable('users');
      */
-    await queryInterface.dropTable('municipio')
+    await queryInterface.dropTable('assembleia')
   }
 };

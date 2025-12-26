@@ -20,6 +20,16 @@ export default {
         allowNull:false,
         unique:true
       },
+      provincia_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'provincia', // nome da tabela (NÃO do model)
+          key: 'id_provincia'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'RESTRICT'
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

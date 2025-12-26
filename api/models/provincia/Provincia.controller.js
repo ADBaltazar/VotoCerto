@@ -20,7 +20,7 @@ export class ControllerProvincia{
 
     //
     async ElimiarProvincia(req,res){
-        const provincia = await this.service.Eliminar(req.params.id)
+        const provincia = await this.service.Eliminar(req.query.id)
         return res .status(200).json({
             message:'Registo excluido com sucesso!',
             data:provincia

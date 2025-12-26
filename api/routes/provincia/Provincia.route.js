@@ -21,7 +21,7 @@ Route.get(
 )
 
 Route.delete(
-    '/provincia/:id',
+    '/provincia/id',
     Controller.ElimiarProvincia.bind(Controller)
 )
 /*

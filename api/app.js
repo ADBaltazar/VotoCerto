@@ -5,14 +5,17 @@ const app = express()
 import { Route } from './routes/provincia/Provincia.route.js'
 import { AppError } from './Error/app.Error.js' 
 
-import swagger from 'swagger-ui-express'
-import swaggerDocumentation from './swagger.json' with {type:'json'}
 
 //configurando leitura de ficheiro JSON
 app.use(express.json())
 
+import swagger from 'swagger-ui-express'
+import swaggerDocumentation from './swagger.json' with {type:'json'}
+
+
+
 app.use(
-  '/',
+  '/documentation',
   swagger.serve,
   swagger.setup(swaggerDocumentation)
 )

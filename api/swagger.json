@@ -1,3 +1,97 @@
 {
-    
+    "openapi":"3.0.0",
+    "info":{
+        "title":"API de eleições online para Presidencia de Angola",
+        "description":"API do Sistema Integrado de Gestão do Processo Eleitoral foi desenvolvido com base em uma arquitetura moderna, segura e escalável, destinada a apoiar todas as fases das Eleições Gerais em Angola, em conformidade com a legislação eleitoral vigente",
+        "termsOfService":"http:localhost:3000/terms",
+        "contact":{
+            "email":"armandobaltazar38@gmail"
+        },
+        "version":"1.0.0"  
+    },
+    "servers":[
+        { 
+            "url":"http://localhost:3000",
+            "description":"API de teste"
+        }
+    ],
+    "paths":{ 
+        "/provincia/nova":{
+            "post":{
+                "sumary":"Cadastro de nova provincia",
+                "description":"Rota de Cadastro de nova provincia",
+                "tags":["provincia"],
+
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/provincia"
+                            },
+                            "examples":{
+                                "provincia":{
+                                    "value":{
+                                        "nome":"Uíge"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "201":{
+                        "description":"Registo Concluido com sucesso"
+                    },
+                    "500":{"description":"Erro interno de servidor"}
+                }
+            }
+        },
+        "/provincias":{
+            "get":{
+                "tags":["provincia"],
+                "sumary":"Lista da Universidades",
+                "description":"Esta Rota é responsavel por listar todas as Universidades",
+                "responses":{
+                    "200":{
+                        "description":"Lista das universidades"
+                    }
+                }
+            }
+        },
+        "/provincia/id":{
+            "delete":{
+                "tags":["provincia"],
+                "sumary":"Elimanar provincia",
+                "description":"Esta rota, permitirá excluir uma provincia pelo ID",
+            
+             "parameters":[
+                {
+                    "name":"id",
+                    "in":"query",
+                    "description":"Id da provincia",
+                    "required":true
+                }
+            ],
+            "responses":{
+                "200":{
+                    "description":"Ok, Registo excluido com sucesso!"
+                },
+                "400":{
+                    "description":"Error, registo não encontrado"
+                }
+            }           
+            }
+
+        }
+    },
+    "components":{
+        "schemas":{
+            "provincia":{
+                "type":"object",
+                "properties":{
+                    "nome":{"type":"string"}
+                }
+            }
+        }
+    }
 }

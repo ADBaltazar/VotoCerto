@@ -3,29 +3,29 @@ export class BaseRepository{
         this.model = model
     }
 
-    //CCreate
-    create(data){
+    //criar um registo
+    criar(data){
         return this.model.create(data)
     }
 
-    //findById
-    findById(id){ 
-        return this.model.findById(id)
+    //lista Registos
+    listarTodos(filtro={}){
+        return this.model.findAll(filtro)
     }
 
-    //findAll
-    findAll(){
-        return this.model.findAll()
+    //buscar por nome
+    listarPorId(where){
+        return this.model.findOne({where})
     }
 
-    //Delete
-    delete(id){
-        return this.model.destroyById(id)
+    //Excluir Registo
+    ExcluirRegisto(where){
+        return this.model.destroy({where})
     }
 
-    //update
-    updateById(data){
-        return this.model.updateById(data)
+    //Actualizar Registo
+    ActualizarRegisto(data, where){
+        return this.model.update(data,{where})
     }
 
 }

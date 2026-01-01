@@ -1,5 +1,7 @@
 import { ProvinciaModel } from "./Provincia.model.js"
+import { MunicipioModel } from "../municipio/municipio.model.js"
 import { BaseRepository } from "../../shared/BaseRepository.js"
+import { AppError } from "../../Error/app.Error.js"
 
 export class RepositoryProvincia extends BaseRepository{
 
@@ -7,29 +9,34 @@ export class RepositoryProvincia extends BaseRepository{
           super(ProvinciaModel)
      }
 
-     //create
-     create(data){
-          return this.model.create(data)
+     //criar uma provincia
+     CriarProvincia(data){
+          return super.criar(data)
+     }
+
+     //listar todos 
+     ListarTodos(){
+          return super.listarTodos()
+     }
+
+     //listar Provincia Por Id
+     ListaPorId(id_provincia){
+          return super.listarPorId({id_provincia})
+     }
+
+     //Eliminar Provincia
+     DeleteProvincia(id){
+          return super.ExcluirRegisto({id_provincia:id})
+     }
+
+     //Actualizar Registo de Provincia
+     AtualizarProvincia(data){
+          return super.ActualizarRegisto(data,{id_provincia:data.id_provincia}) 
+     }
+
+     //listar por Nome
+     VerificarNome(nome){
+          return super.listarPorId({nome})
      }
      
-     //LSITAR TODAS AS PROVINCIAS
-     findAll(){
-          return this.model.findAll()
-     }
-
-     //
-     findById(id){
-          return this.model.findByPk(id)
-     }
-
-     //
-     update(data){
-          return this.model.update(data)
-     }
-
-     //elimiar uma provincia
-     deleteById(id){
-          return this.model.destroy({where:{id_provincia:id}})
-     }
-
 }

@@ -1,6 +1,7 @@
 import {app} from './app.js'
 import { authenticationdb } from './database/database.js'
 import { env } from './config/env.js'
+//import {} from './database/migrations.relacion.js'
 
 
 

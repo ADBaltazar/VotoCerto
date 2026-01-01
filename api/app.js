@@ -2,12 +2,14 @@ import express from 'express'
 
 const app = express()
 
-import { Route } from './routes/provincia/Provincia.route.js'
+import { Route } from './routes/Provincia.route.js'
 import { AppError } from './Error/app.Error.js' 
+import { RouteMunicipio } from './routes/Municipio.route.js'
 
 
 //configurando leitura de ficheiro JSON
 app.use(express.json())
+
 
 import swagger from 'swagger-ui-express'
 import swaggerDocumentation from './swagger.json' with {type:'json'}
@@ -22,6 +24,7 @@ app.use(
 
 
 app.use(Route)
+app.use(RouteMunicipio)
 
 
 //tratamento de Erro
@@ -35,6 +38,7 @@ app.use((err, req, res, next) => {
   console.error(err)
 
   return res.status(500).json({
+    message:err.message,
     error: 'Erro interno do servidor'
   })
 })

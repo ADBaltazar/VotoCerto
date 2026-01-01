@@ -8,22 +8,29 @@ export class ControllerProvincia{
 
     //REGISTRAR NOVA PROVINCIA
     async CreateProvincia(req,res){ 
-        const provincia = await this.service.CriarProvincia(req.body)
-        return res.status(201).json(provincia)
+        return res.status(201).json(await this.service.NovoRegisto(req.body))
     }
 
     //LISTAR TODAS AS PROVINCIAS
     async Listarprovincias(req,res){
-        const provincias = await this.service.Provincias()
-        return res.status(200).json(provincias)
+        return res.status(200).json(await this.service.ListarProvincias())
     }
 
     //
     async ElimiarProvincia(req,res){
-        const provincia = await this.service.Eliminar(req.query.id)
-        return res .status(200).json({
-            message:'Registo excluido com sucesso!',
-            data:provincia
-        })
+        return res.status(200).json(await this.service. ExcluirProvincia(req.query.id))
+    }
+
+    
+    //
+    async ListarProvinciaMunicipios(req,res){
+        return res.json(await this.service.provinciasMunicipios())
+    }
+
+ 
+
+    //
+    async ActualizarProvincia(req,res){
+        return res.status(201).json(await this.service.ActualizarProvincia(req.body))
     }
 } 

@@ -16,9 +16,20 @@ export class RepositoryProvincia extends BaseRepository{
 
      //listar todos 
      ListarTodos(){
-          return super.listarTodos()
+          return super.listarTodos({raw:true})
      }
 
+     //ListarPRovinciaMunicipio
+     ListaProvinciaMnunicipio(){
+          const condicao =
+          {
+               include:{
+                    model:MunicipioModel,
+                    as:'municipios'
+          }}
+          return super.listarTodos(condicao)
+     }
+     
      //listar Provincia Por Id
      ListaPorId(id_provincia){
           return super.listarPorId({id_provincia})

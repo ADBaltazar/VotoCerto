@@ -6,16 +6,20 @@ export class MunicipioController{
     }
 
     async novomunicipio (req,res){
-        const novo = await this.service.createmunicipio(req.body)
-        return res.json(novo)
+        return res.json(await this.service.NovoMunicipio(req.body))
     }
 
     async listarmunicipios(req,res){
-        return res.json(await this.service.listMunicipios())
+        return res.json(await this.service.listarTodosMunicipios())
     }
 
     async excluirmunicipio(req,res){
-        return res.status(201).json(await this.service.deleteMunicipio(req.query.id))
+        return res.status(201).json(await this.service.EliminarMunicipio(req.query.id))
+    }
+
+    async ActualizarMunicipio(req,res){
+        const dadoactualizado = await this.service.ActualizarMunicipio(req.body)
+        return res.status(201).json(dadoactualizado)
     }
 
 

@@ -3,6 +3,7 @@ import express from 'express'
 const app = express()
 
 import { Route } from './routes/Provincia.route.js'
+import { routeComuna } from './routes/comuna.route.js'
 import { AppError } from './Error/app.Error.js' 
 import { RouteMunicipio } from './routes/Municipio.route.js'
 
@@ -25,6 +26,7 @@ app.use(
 
 app.use(Route)
 app.use(RouteMunicipio)
+app.use(routeComuna)
 
 
 //tratamento de Erro

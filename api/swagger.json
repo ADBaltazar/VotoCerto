@@ -46,6 +46,36 @@
                 }
             }
         },
+        "/provincia/actulizar":{
+            "put":{
+                "sumary":"actualizar provincia",
+                "description":"Actualização de dados de uma provincia",
+                "tags":["provincia"],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/provincia"
+                            },
+                            "examples":{
+                                "provincia":{
+                                    "value":{
+                                            "nome":"Luanda Tarde",
+                                            "id_provincia":1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "201":{
+                        "description":"Ok ✅ "
+                    }
+                }
+
+            }
+        },
         "/provincias":{
             "get":{
                 "tags":["provincia"],
@@ -58,6 +88,19 @@
                 }
             }
         },
+
+        "/provinciar/municipios":{
+            "get":{
+                "tags":["provincia"],
+                "sumary":"Listar provincias e seus municipios",
+                "description":"Esta rota permite retornar as provincias e seus municipios",
+
+                "responses":{
+                    "200":{"description":"ok ✅"}
+                }
+            }
+        },
+
         "/provincia/id":{
             "delete":{
                 "tags":["provincia"],
@@ -74,7 +117,7 @@
             ],
             "responses":{
                 "200":{
-                    "description":"Ok, Registo excluido com sucesso!"
+                    "description":"Ok ✅ "
                 },
                 "400":{
                     "description":"Error, registo não encontrado"
@@ -82,16 +125,104 @@
             }           
             }
 
+        },
+
+        "/municipio":{
+            "post":{
+                "tags":["EndPoint - municipio"],
+                "sumary":"Rota de cadastro de novo municipio",
+                "description":"Esta rota permite o registo de novo municipio",
+
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/municipio"
+                            },
+
+                            "examples":{
+                                "municipio":{
+                                    "value":{
+                                        "nome":"Maquela do Zombo",
+                                        "provincia_id":1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+
+                "responses":{
+                    "200":{
+                        "description":"Ok"
+                    },
+                    "400":{
+                        "description":"Duplicação de nome..."
+                    }
+                }
+            }
+        },
+        "/municipios/lista":{
+            "get":{
+                "tags":["EndPoint - municipio"],
+                "sumary":"Lsitar",
+                "description":"Esta rota permite listar os municipios cadastrados no sistema",
+
+                "responses":{
+                    "200":{
+                        "description":"Ok"
+                    },
+                    "400":{
+                        "description":"Erro, Erro interno do Servidor..."
+                    }
+                }
+            }
+        },
+
+        "/municipio/delete/id":{
+            "delete":{
+                "tags":["EndPoint - municipio"],
+                "sumary":"Eliminar",
+                "description":"Esta rota permitirá a eliminação de uma registo cadastrado"
+
+                ,"parameters":[
+                    {
+                        "name":"id",
+                        "in":"query",
+                        "description":"",
+                        "required":true
+                    }
+                ],
+                "responses":{
+                    "201":{
+                        "description":"✅ Registo Excluido com sucesso!"
+                    },
+                    "400":{
+                        "description":"❌ REgisto não encontrado"
+                    }
+                }
+            }
         }
+
+        
     },
     "components":{
         "schemas":{
+
             "provincia":{
                 "type":"object",
                 "properties":{
                     "nome":{"type":"string"}
                 }
+            },
+
+            "municipio":{
+                "type":"object",
+                "properties":{
+                    "nome":{"type":"string"}
+                }
             }
+
         }
     }
 }

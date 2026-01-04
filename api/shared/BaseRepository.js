@@ -9,7 +9,7 @@ export class BaseRepository{
     }
 
     //lista Registos
-    listarTodos(filtro={}){
+    listarTodos(filtro){
         return this.model.findAll(filtro)
     }
 

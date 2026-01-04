@@ -25,6 +25,11 @@ export class ServiceProvincia{
         return this.repository. ListarTodos()
     }
 
+    //Listar provincias e seus Municipios
+    async ProvinciaMunicipio(){
+        return this.repository.ListaProvinciaMnunicipio()
+    }
+
     //Excluir uma Provincia
     async ExcluirProvincia(id){
 

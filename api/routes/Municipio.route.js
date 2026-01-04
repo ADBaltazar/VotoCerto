@@ -30,4 +30,9 @@ RouteMunicipio.delete(
     controller.excluirmunicipio.bind(controller)
 )
 
+RouteMunicipio.put(
+    '/municipio/actualizar',
+    controller.ActualizarMunicipio.bind(controller)
+)
+
 export {RouteMunicipio}

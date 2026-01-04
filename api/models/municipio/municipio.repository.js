@@ -1,3 +1,4 @@
+import { raw } from "express";
 import { BaseRepository } from "../../shared/BaseRepository.js";
 import { MunicipioModel} from "./municipio.model.js";
 
@@ -6,18 +7,30 @@ export class MunicipioRepository extends BaseRepository{
        super(MunicipioModel)
     }
 
-    //chamando a create da baserepository
-    create(data){
-        return this.model.create(data)
+    //Registrar novo Municipio
+    CriarMunicipio(data){
+        return this.criar(data)
     }
 
-    findAll(){
-        return this.model.findAll({raw:true})
+    //Listar todos Municipios
+    ListarMunicipio(){
+        return super.listarTodos({raw:true})
     }
 
-    async DeleteByMunicipio(id){
-        console.log("cheguei aqui")
-        console.log("id Capturado: ",id)
-        return await this.model.destroyById({where:{id_municipio:id}})
+    //
+    ListarMunicipioID(id){
+        return super.listarPorId({id_municipio:id})
     }
+
+    //
+    Actualizar(data){
+        return super.ActualizarRegisto(data,{id_municipio:data.id_municipio})
+    }
+
+    //
+    ExcluirMunicipio(id){
+        return super.ExcluirRegisto({id_municipio:id})
+    }
+
+
 }

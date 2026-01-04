@@ -1,10 +1,9 @@
 import { DataTypes } from "sequelize";
 import { DatabaseConection } from "../../config/Database.Conection.js";  
-import { ComunaModel } from "../comuna/comuna.model.js";
 //criando a model municipio para mapear a nossa migration
 
-export const MunicipioModel =  DatabaseConection.define('municipio',{
-    id_municipio:{
+export const ComunaModel =  DatabaseConection.define('comuna',{
+    id_comuna:{
         type: DataTypes.INTEGER,
         autoIncrement:true,
         primaryKey:true
@@ -14,27 +13,19 @@ export const MunicipioModel =  DatabaseConection.define('municipio',{
         allowNull:false,
         unique:true
     },
-    provincia_id: {
+    id_municipio: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: 'provincia', // nome da tabela (NÃO do model)
-          key: 'id_provincia'
+          model: 'municipio', // nome da tabela (NÃO do model)
+          key: 'id_municipio'
         }
        }
     },
     {
-        tableName:"municipio",
+        tableName:"comuna",
         timestamps:true,
         underscored:true
 
     }
 )
-
-//
-MunicipioModel.hasMany(ComunaModel,{foreignKey:"id_municipio"})
-
-ComunaModel.belongsTo(MunicipioModel,{foreignKey:"id_municipio"})
-
-
-

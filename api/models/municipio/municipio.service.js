@@ -1,4 +1,5 @@
 import { MunicipioRepository } from "./municipio.repository.js";
+import { AppError } from "../../Error/app.Error.js";
 
 export class MunicipioService{
     constructor(municipioRepository){
@@ -6,23 +7,48 @@ export class MunicipioService{
     }
 
     //criar um novo Municipio
-    createmunicipio(data){
-        //const verificarNome = this.municipioRepository.findOne(data.nome)
+    async NovoMunicipio(data){
+        //Verificar se os Municipio já se encontra Reistrada
+        const nome = data.nome
+        const MunicipioExiste = await this.municipioRepository.listarPorId({nome:data.nome})
 
-       // console.log(verificarNome)
+        if(MunicipioExiste != null){ 
+            throw new AppError('🚫 Nome Duplicado! Nome do municipio já se encontra registrada.')            
+        }
 
-        return this.municipioRepository.create(data)
+        return this.municipioRepository.CriarMunicipio(data)
+        
+    }
+
+    async ActualizarMunicipio(data){
+        //Verificar se os Municipio já se encontra Reistrada
+        const MunicipioExiste = await this.municipioRepository.listarPorId({id_municipio:data.id_municipio})
+
+        if(MunicipioExiste == null){ 
+            throw new AppError('🚫 Registo não encontrado')            
+        }
+        
+        return this.municipioRepository.Actualizar(data)
     }
 
     //listar os municipios
-    listMunicipios(){
-        return this.municipioRepository.findAll()
+    listarTodosMunicipios(){
+        return this.municipioRepository.ListarMunicipio()
     }
 
     //
-    async deleteMunicipio(id){
-        const MunicipioExiste = await this.municipioRepository.DeleteByMunicipio(id)
-        return MunicipioExiste
+    async EliminarMunicipio(id){
+
+        const VerificarNome = await this.municipioRepository.ListarMunicipioID(id)
+
+        if(!VerificarNome){
+            throw new AppError('🚫 Registo não encontrado!',400)
+        } 
+
+        await this.municipioRepository.ExcluirMunicipio(id)
+
+        return VerificarNome
+    
     }
 
 }

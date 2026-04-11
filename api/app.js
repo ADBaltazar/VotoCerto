@@ -15,12 +15,17 @@ app.use(express.json())
 import swagger from 'swagger-ui-express'
 import swaggerDocumentation from './swagger.json' with {type:'json'}
 
-
-
+ 
 app.use(
   '/documentation',
   swagger.serve,
   swagger.setup(swaggerDocumentation)
+)
+
+app.get(
+  '/',(req,res)=>{
+    res.redirect('/documentation')
+  }
 )
 
 
